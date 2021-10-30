@@ -1,0 +1,23 @@
+// definierar variabler som används i hela projektet
+@import url("https://fonts.googleapis.com/css2?family=Biryani:wght@400;700&family=Montserrat:wght@400;700;900&family=Sarala:wght@400;700&display=swap");
+
+$font-heading: Montserrat, Arial, "Sans-serif";
+$font-body: Sarala, Arial, "Sans-serif";
+
+$white: #f3e7f3;
+
+$base: linear-gradient(45deg, #030607, #000103 50%, #150a2e);
+$layer: #6661;
+$colorlayer: #7cc0e211;
+$accent: #7cc0e2;
+$gradient: linear-gradient(45deg, #7cc0e2, #256af3 50%, #6b36e7);
+
+$max-width: 1200px;
+$radius : .5rem;
+
+// gradient som används för att ge viss text en gradient
+@mixin gradient {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

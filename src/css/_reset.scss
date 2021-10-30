@@ -1,0 +1,13 @@
+// importera variabelfilen och typsnittet
+@import "variables";
+@import "normalize.css/normalize";
+
+
+// återställer till mina standardvärden
+* {
+  line-height: 1.65;
+  margin: 0;
+  padding: 0;
+  font-family:$font-body;
+  color:$white;
+}

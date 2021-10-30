@@ -1,0 +1,6 @@
+// media query för surfplattor
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}

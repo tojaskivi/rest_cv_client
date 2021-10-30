@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <title>Tommi Ojaskivi // CV</title>
+  </head>
+  <body>
+    <div id="overlay-container">
+      <div id="overlay" onclick="hideOverlay()"></div>
+      <div id="overlay-form"></div>
+    </div>
+    <div class="main-content">
+      <header>
+        <img src="assets/logo.png" alt="" />
+        <div>
+          <div class="personal-info">
+            <b class="accent">Tommi Ojaskivi</b>
+            <br />
+            <span class="accent">webbutvecklare</span>
+          </div>
+          <p>
+            Hallåj! Jag är en webbutvecklare med ett stort intresse för att
+            skapa moderna, tillgänglighetsanpassade, responsiva, hemsidor. På
+            fritiden gillar jag att lösa olika problem (korsord, rubiks kub) och
+            hålla på med musik.
+          </p>
+          <p>Hör av dig så hittar vi en lösning som passar just dig! :)
+          </p>
+          <nav>
+            <a href="https://github.com/toskivi" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a href="https://www.linkedin.com/in/tommiojaskivi/" target="_blank"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="mailto:tommi@ojaskivi.se"><i class="fas fa-at"></i></a>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <h1>Webbutvecklare - cool h1</h1>
+        <form class="search-form" id="search-form">
+          <label>
+            <span class="hidden">sök</span>
+            <input type="search" id="search-value" placeholder="sökterm" />
+          </label>
+          <input type="submit" class="button" value="sök" />
+        </form>
+
+        <div id="search-term"></div>
+        <div id="api-output">
+          <section>
+            <h2>Kurser</h2>
+            <div class="api-output" id="api-courses">
+              <img class="loading" src="assets/loading.svg" alt="" />
+            </div>
+          </section>
+          <section>
+            <h2>Jobb</h2>
+            <div class="api-output" id="api-jobs">
+              <img class="loading" src="assets/loading.svg" alt="" />
+            </div>
+          </section>
+          <section>
+            <h2>Hemsidor</h2>
+            <div class="api-output" id="api-websites">
+              <img class="loading" src="assets/loading.svg" alt="" />
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <footer>
+      &copy; 2021 // Tommi<br />
+      <nav>
+        <a href="https://github.com/toskivi" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/tommiojaskivi/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="mailto:tommi@ojaskivi.se"><i class="fas fa-at"></i></a>
+      </nav>
+      <div class="login" id="login">
+        <details>
+          <summary>Logga in</summary>
+          <form id="login-form" name="login-form">
+            <input
+              id="login-credits"
+              type="text"
+              name="credits"
+              placeholder="Inloggningsuppgifter"
+            />
+            <input type="submit" value="logga in" />
+            <br /><span id="login-input-info"></span>
+          </form>
+        </details>
+      </div>
+    </footer>
+    <script src="js/main.js"></script>
+  </body>
+</html>

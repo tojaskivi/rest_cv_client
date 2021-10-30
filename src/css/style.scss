@@ -1,0 +1,318 @@
+// importerar partials
+@import "reset";
+@import "media";
+@import "variables";
+
+body {
+  background: $base;
+  position: relative;
+  min-height: 100vh;
+}
+
+.hidden {
+  position: absolute;
+  pointer-events: none;
+  z-index: -99;
+  opacity: 0;
+}
+
+a,
+i {
+  color: inherit;
+}
+
+img {
+  width: 100%;
+}
+
+// placeholder selector, genererar inte till en egen CSS-regel, utan hamnar endast där den används
+%input {
+  padding: 0.2rem 0.5rem;
+  background: $white;
+  color: black;
+  border: none;
+  border-radius: $radius;
+}
+
+%select {
+  padding: 0.2rem 0.5rem;
+  background: $white;
+  color: black;
+  display: flex;
+  width: 100%;
+  border-radius: $radius;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-heading;
+  font-weight: bold;
+  line-height: 1.15;
+  margin: 1rem auto 0.3rem auto;
+  // textfärgen blir en gradient
+  @include gradient;
+  text-transform: lowercase;
+}
+
+h1 {
+  margin: 0 auto 1rem 0;
+}
+
+button,
+input[type="submit"],
+summary {
+  cursor: pointer;
+}
+
+// nesting
+#overlay-container {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #000c;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  #overlay {
+    position: fixed;
+    inset: 0;
+  }
+
+  #overlay-form {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0.5rem 0.1rem $accent;
+    border-radius: $radius;
+    max-width: 400px;
+    width: 80%;
+    margin: auto;
+    background: $base;
+    padding: 1rem;
+
+    select {
+      // select ärver %select-reglerna
+      @extend %select;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      font-weight: bold;
+      label {
+        display: flex;
+        flex-direction: column;
+        margin: 0.2rem 0 0.5rem 0;
+      }
+      input {
+        @extend %input;
+        &[type="submit"] {
+          @extend %button;
+          width: min-content;
+          margin: 0.5rem auto;
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  background: $layer;
+  margin: auto;
+  max-width: $max-width;
+  display: grid;
+  grid-template-columns: 300px auto;
+
+  // &-tecknet står för parent, alltså .main-content i detta fall
+  & > * {
+    padding: 1rem;
+  }
+
+  // när mediaqueryn uppfylls sker dessa regler
+  @include tablet {
+    display: block;
+
+    header {
+      position: initial;
+      img {
+        max-width: 200px;
+        display: flex;
+      }
+    }
+  }
+}
+
+// nesting
+header {
+  background: $layer;
+  position: sticky;
+  top: 0;
+  height: max-content;
+  
+  /* header { img {..}} är samma sak som header img {} i vanlig css */
+  img {
+    border-radius: 99rem;
+    width: 75%;
+    box-shadow: 0 0 1rem $accent;
+    background: $accent;
+    margin: auto;
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    max-width: 48ch;
+    margin: 0.2rem auto 0.5rem auto;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 2rem;
+
+    a:hover {
+      color: $accent;
+      transition: 0.2s ease;
+    }
+  }
+
+  .personal-info {
+    text-align: center;
+  }
+}
+
+main {
+  .search-form {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.2rem;
+
+    & * {
+      height: 2rem;
+    }
+    label {
+      display: flex;
+      width: 100%;
+      input {
+        width: 100%;
+        @extend %input;
+        border-radius: $radius;
+      }
+    }
+    input[type="submit"] {
+      width: 5rem;
+    }
+  }
+  section {
+    .api-output {
+      .api-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 1rem;
+        margin: 0rem -1rem;
+        min-height: 6rem;
+        align-items: center;
+
+        &:nth-child(odd) {
+          background: $colorlayer;
+        }
+        .buttons {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          padding-left: 1rem;
+          justify-content: center;
+          button {
+            appearance: none;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            &:hover * {
+              color: $accent;
+              transition: 0.2s ease;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+%button,
+.button {
+  padding: 0.2rem 0.5rem;
+  background: $accent;
+  min-height: 2rem;
+  color: black;
+  margin: 0.5rem auto;
+  border: none;
+  font-weight: bold;
+  border-radius: $radius;
+  &:hover {
+    filter: saturate(2);
+    transition: 0.2s ease;
+  }
+}
+
+.accent {
+  color: $accent;
+}
+
+.loading {
+  width: 100px;
+  margin: auto;
+}
+
+.error {
+  font-weight: bold;
+  color: red;
+  text-align: center;
+}
+footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 2rem 0;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  flex-direction: column;
+
+  nav {
+    font-size: 1.5rem;
+    a:hover {
+      color: $accent;
+      transition: 0.2s ease;
+    }
+  }
+  .login {
+    display: flex;
+    text-align: center;
+    gap: 0.5rem;
+
+    button {
+      @extend %button;
+      font-weight: bold;
+    }
+    details {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      input,
+      button {
+        padding: 0.2rem 0.5rem;
+        background: $white;
+        color: black;
+        margin: 0.5rem auto;
+        border: none;
+        border-radius: $radius;
+      }
+    }
+  }
+}
