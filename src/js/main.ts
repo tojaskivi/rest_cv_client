@@ -277,7 +277,7 @@ async function destroy(e: any, type: string) {
     let name = "objektet ";
     if (target.dataset.name) name += target.dataset.name;
     else if (target.dataset.title) name += target.dataset.title;
-    if (confirm(`Vill du radera ${name}? Detta går inte att ändra.`)) {
+    if (confirm(`Vill du radera ${name}? Detta går inte att ångra.`)) {
 
         // if a user tries to be sneaky beaky and fakes a successful login, the token still has to validate at the endpoint
         let meta = {
@@ -328,6 +328,8 @@ function generateForm(data) {
         form += `<input type="submit" value="spara"></form><p id="edit-error" class="error"></p>`
 
         overlayFormEl.innerHTML = form;
+        overlayEl.querySelector('input').focus();
+
     }
 }
 
@@ -452,6 +454,7 @@ function selectChange() {
     }
 
     newItemFormEl.innerHTML += `<input type='submit' value='lägg till'></form><p id="new-error" class="error"></p>`;
+
 }
 
 // print the inital new-item form
@@ -461,7 +464,7 @@ function newCourseForm() {
         `
         <h2>lägg till</h2>
 
-        <select name="select-type" id="select-type" onchange="selectChange()">
+        <select name="select-type" id="select-type" onchange="selectChange()" focus>
         <option value="courses">kurs</option>
         <option value="jobs">jobb</option>
         <option value="websites">hemsida</option>
@@ -487,6 +490,7 @@ function newCourseForm() {
         <input type='submit' value='lägg till'></form><p id="new-error" class="error"></p>`;
 
     showOverlay();
+    overlayFormEl.querySelector('select').focus();
     selectEl = document.getElementById("select-type")
 }
 

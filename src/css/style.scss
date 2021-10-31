@@ -2,6 +2,9 @@
 @import "reset";
 @import "media";
 @import "variables";
+html{
+  background: rgb(18, 18, 19);
+}
 
 body {
   background: $base;
@@ -42,6 +45,10 @@ img {
   display: flex;
   width: 100%;
   border-radius: $radius;
+}
+
+*:focus-visible{
+  box-shadow: 0 0 0 .2rem $accent;
 }
 
 h1,
@@ -240,7 +247,7 @@ main {
             appearance: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             padding: 0.2rem;
             &:hover * {
               color: $accent;

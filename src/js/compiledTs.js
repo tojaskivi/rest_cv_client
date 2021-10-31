@@ -286,7 +286,7 @@ function destroy(e, type) {
                         name += target.dataset.name;
                     else if (target.dataset.title)
                         name += target.dataset.title;
-                    if (!confirm("Vill du radera " + name + "? Detta g\u00E5r inte att \u00E4ndra.")) return [3, 2];
+                    if (!confirm("Vill du radera " + name + "? Detta g\u00E5r inte att \u00E5ngra.")) return [3, 2];
                     meta = {
                         method: 'DELETE',
                         headers: {
@@ -323,6 +323,7 @@ function generateForm(data) {
         }
         form += "<input type=\"submit\" value=\"spara\"></form><p id=\"edit-error\" class=\"error\"></p>";
         overlayFormEl.innerHTML = form;
+        overlayEl.querySelector('input').focus();
     }
 }
 function updateItem(event, id, type) {
@@ -399,8 +400,9 @@ function selectChange() {
 }
 function newCourseForm() {
     overlayFormEl.innerHTML =
-        "\n        <h2>l\u00E4gg till</h2>\n\n        <select name=\"select-type\" id=\"select-type\" onchange=\"selectChange()\">\n        <option value=\"courses\">kurs</option>\n        <option value=\"jobs\">jobb</option>\n        <option value=\"websites\">hemsida</option>\n        </select>\n        <form id=\"form-new-item\" data-type=\"courses\" name=\"form-new-item\" method=\"POST\" onsubmit=\"addNewItem(event)\">\n\n        <label>kursnamn\n            <input name=\"name\" type=\"text\" placeholder=\"Webbutveckling III\" required />\n        </label>\n    \n        <label>skola/universitet\n            <input name=\"school\" type=\"text\" placeholder=\"MIUN\" required />\n        </label>\n    \n        <label>startdatum\n            <input name=\"startDate\" type=\"date\" required />\n        </label>\n\n        <label>slutdatum\n            <input name=\"endDate\" type=\"date\" required />\n        </label>\n\n        <input type='submit' value='l\u00E4gg till'></form><p id=\"new-error\" class=\"error\"></p>";
+        "\n        <h2>l\u00E4gg till</h2>\n\n        <select name=\"select-type\" id=\"select-type\" onchange=\"selectChange()\" focus>\n        <option value=\"courses\">kurs</option>\n        <option value=\"jobs\">jobb</option>\n        <option value=\"websites\">hemsida</option>\n        </select>\n        <form id=\"form-new-item\" data-type=\"courses\" name=\"form-new-item\" method=\"POST\" onsubmit=\"addNewItem(event)\">\n\n        <label>kursnamn\n            <input name=\"name\" type=\"text\" placeholder=\"Webbutveckling III\" required />\n        </label>\n    \n        <label>skola/universitet\n            <input name=\"school\" type=\"text\" placeholder=\"MIUN\" required />\n        </label>\n    \n        <label>startdatum\n            <input name=\"startDate\" type=\"date\" required />\n        </label>\n\n        <label>slutdatum\n            <input name=\"endDate\" type=\"date\" required />\n        </label>\n\n        <input type='submit' value='l\u00E4gg till'></form><p id=\"new-error\" class=\"error\"></p>";
     showOverlay();
+    overlayFormEl.querySelector('select').focus();
     selectEl = document.getElementById("select-type");
 }
 function addNewItem(event) {
