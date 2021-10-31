@@ -246,7 +246,7 @@ function printJobs(jobs: Job[]) {
 function printWebsites(websites: Website[]) {
     websitesEl.innerHTML = "";
     if (websites.length) {
-        websites.forEach(website => websitesEl.innerHTML += `<div class="api-item" data-id="${website.id}" data-type="websites" data-names='["titel","länk","beskrivning"]' data-title="${website.title}" data-url="${website.url}" data-description="${website.description}"><div><b><a href="${website.url}" target="_blank" rel="noreferrer">${website.title}</a></b><br>${website.description}</div><div class="buttons"><button aria-label="redigera ${website.title}" onclick="editItem(event)"><i class="far fa-edit"></i></button><button aria-label="radera ${website.title}" onclick="destroy(event, 'websites')"><i class="far fa-trash-alt"></i></button></div></div>`);
+        websites.forEach(website => websitesEl.innerHTML += `<div class="api-item" data-id="${website.id}" data-type="websites" data-names='["titel","länk","beskrivning"]' data-title="${website.title}" data-url="${website.url}" data-description="${website.description}"><div><b><a href="${website.url}" target="_blank" rel="noreferrer">${website.title}</a></b><br><span>${website.description}</span></div><div class="buttons"><button aria-label="redigera ${website.title}" onclick="editItem(event)"><i class="far fa-edit"></i></button><button aria-label="radera ${website.title}" onclick="destroy(event, 'websites')"><i class="far fa-trash-alt"></i></button></div></div>`);
         toggleButtons(websitesEl);
     } else
         websitesEl.innerHTML += `<div class="api-item">Inga hemsidor hittades</div>`;
@@ -555,6 +555,11 @@ async function search(event: any) {
         fetchAllData();
         return;
     }
+    if (searchTerm.length < 3) {
+        document.getElementById('search-term').innerHTML = `<b class="error">Minst tre tecken</b>`;
+        // fetchAllData();
+        return;
+    }
 
     // print the searchterm
     document.getElementById('search-term').innerHTML = `<b>Sökresultat för: </b>${escapeHtml(searchTerm)}`;
@@ -590,34 +595,43 @@ async function search(event: any) {
             switch (property) {
                 case "courses": await printCourses(response[property]); highlight(coursesEl, searchTerm); break;
                 case "jobs": await printJobs(response[property]); highlight(jobsEl, searchTerm); break;
-                case "websites": await printWebsites(response[property]); break;
+                case "websites": await printWebsites(response[property]); highlight(websitesEl, searchTerm); break;
             }
         }
-
-
-
-
-        //   }
     }
-
-
     else {
         fetchAllData();
         document.getElementById('search-term').innerHTML = `<b>Något gick fel... försök igen! Troligtvis användes ogiltiga tecken</b>`;
     }
 }
 
+
+// highlights the found word when searching
 function highlight(element, searchTerm) {
+
+    // select every api-item from the element
     let items = element.querySelectorAll('.api-item');
 
+    let query = "div"
+
+    // the websites has a href that shouldn't be changed, so it targets a span instead
+    if (element.id == "api-websites") {
+        query = "div span"
+    }
+
+    // loop through all the found elements
     items.forEach(element => {
-        let data = element.querySelector('div');
-        if(data.innerHTML) console.log(data);
-        // let regex = new RegExp(`(?:\\w+|)${searchTerm}(?:\\w+|)`, "gi");
-        if (data) {
+        let data = element.querySelector(query);
+        
+        // prevent error
+        if (data && data.innerHTML) {
+        
+            // Regex that targets the whole word where searchterm is found
+            // If searching for dev from string WeBdeVelopeMent, the whole string will be found 
             let regex = new RegExp(`\\w*${searchTerm}\\w*`, "gi");
+
+            // add a class and span to the found word
             data.innerHTML = data.innerHTML.replace(regex, `<span class="search-highlight">${data.innerHTML.match(regex)[0]}</span>`)
         }
-    }
-    );
+    });
 }
