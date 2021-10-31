@@ -547,8 +547,8 @@ async function search(event: any) {
     event.preventDefault();
 
     // get the searchterm
-    let jagHatarTypeScript: any = document.getElementById("search-value");
-    let searchTerm = jagHatarTypeScript.value;
+    let temp: any = document.getElementById("search-value");
+    let searchTerm = temp.value;
 
     if (searchTerm.length == 0) {
         document.getElementById('search-term').innerHTML = ``;
@@ -583,15 +583,41 @@ async function search(event: any) {
     // if there isn't an exception, the query has been successful (even if the search result is 0)
     if (!response.exception) {
         for (const property in response) {
+            for (let i = 0; i < response[property].length; i++) {
+                // console.log(response[property][i]);
+            }
+
             switch (property) {
-                case "courses": printCourses(response[property]); break;
-                case "jobs": printJobs(response[property]); break;
-                case "websites": printWebsites(response[property]); break;
+                case "courses": await printCourses(response[property]); highlight(coursesEl, searchTerm); break;
+                case "jobs": await printJobs(response[property]); highlight(jobsEl, searchTerm); break;
+                case "websites": await printWebsites(response[property]); break;
             }
         }
+
+
+
+
+        //   }
     }
+
+
     else {
         fetchAllData();
         document.getElementById('search-term').innerHTML = `<b>Något gick fel... försök igen! Troligtvis användes ogiltiga tecken</b>`;
     }
+}
+
+function highlight(element, searchTerm) {
+    let items = element.querySelectorAll('.api-item');
+
+    items.forEach(element => {
+        let data = element.querySelector('div');
+        if(data.innerHTML) console.log(data);
+        // let regex = new RegExp(`(?:\\w+|)${searchTerm}(?:\\w+|)`, "gi");
+        if (data) {
+            let regex = new RegExp(`\\w*${searchTerm}\\w*`, "gi");
+            data.innerHTML = data.innerHTML.replace(regex, `<span class="search-highlight">${data.innerHTML.match(regex)[0]}</span>`)
+        }
+    }
+    );
 }

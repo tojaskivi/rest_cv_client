@@ -459,13 +459,13 @@ function escapeHtml(text) {
 }
 function search(event) {
     return __awaiter(this, void 0, void 0, function () {
-        var jagHatarTypeScript, searchTerm, meta, loading, response, property;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var temp, searchTerm, meta, loading, response, _a, _b, _i, property, i, _c;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
                     event.preventDefault();
-                    jagHatarTypeScript = document.getElementById("search-value");
-                    searchTerm = jagHatarTypeScript.value;
+                    temp = document.getElementById("search-value");
+                    searchTerm = temp.value;
                     if (searchTerm.length == 0) {
                         document.getElementById('search-term').innerHTML = "";
                         fetchAllData();
@@ -489,28 +489,61 @@ function search(event) {
                             console.error(error);
                         })];
                 case 1:
-                    response = _a.sent();
-                    if (!response.exception) {
-                        for (property in response) {
-                            switch (property) {
-                                case "courses":
-                                    printCourses(response[property]);
-                                    break;
-                                case "jobs":
-                                    printJobs(response[property]);
-                                    break;
-                                case "websites":
-                                    printWebsites(response[property]);
-                                    break;
-                            }
-                        }
+                    response = _d.sent();
+                    if (!!response.exception) return [3, 11];
+                    _a = [];
+                    for (_b in response)
+                        _a.push(_b);
+                    _i = 0;
+                    _d.label = 2;
+                case 2:
+                    if (!(_i < _a.length)) return [3, 10];
+                    property = _a[_i];
+                    for (i = 0; i < response[property].length; i++) {
                     }
-                    else {
-                        fetchAllData();
-                        document.getElementById('search-term').innerHTML = "<b>N\u00E5got gick fel... f\u00F6rs\u00F6k igen! Troligtvis anv\u00E4ndes ogiltiga tecken</b>";
+                    _c = property;
+                    switch (_c) {
+                        case "courses": return [3, 3];
+                        case "jobs": return [3, 5];
+                        case "websites": return [3, 7];
                     }
-                    return [2];
+                    return [3, 9];
+                case 3: return [4, printCourses(response[property])];
+                case 4:
+                    _d.sent();
+                    highlight(coursesEl, searchTerm);
+                    return [3, 9];
+                case 5: return [4, printJobs(response[property])];
+                case 6:
+                    _d.sent();
+                    highlight(jobsEl, searchTerm);
+                    return [3, 9];
+                case 7: return [4, printWebsites(response[property])];
+                case 8:
+                    _d.sent();
+                    return [3, 9];
+                case 9:
+                    _i++;
+                    return [3, 2];
+                case 10: return [3, 12];
+                case 11:
+                    fetchAllData();
+                    document.getElementById('search-term').innerHTML = "<b>N\u00E5got gick fel... f\u00F6rs\u00F6k igen! Troligtvis anv\u00E4ndes ogiltiga tecken</b>";
+                    _d.label = 12;
+                case 12: return [2];
             }
         });
+    });
+}
+function highlight(element, searchTerm) {
+    var items = element.querySelectorAll('.api-item');
+    items.forEach(function (element) {
+        var data = element.querySelector('div');
+        if (data.innerHTML)
+            console.log(data);
+        if (data) {
+            var regex = new RegExp("\\w*" + searchTerm + "\\w*", "gi");
+            data.innerHTML = data.innerHTML.replace(regex, "<span class=\"search-highlight\">" + data.innerHTML.match(regex)[0] + "</span>");
+        }
     });
 }
