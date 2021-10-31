@@ -123,7 +123,7 @@ function toggleLogin() {
         toggleButtons();
     }
     else {
-        loginEl.innerHTML = "\n        <details>\n        <summary>Logga in</summary>\n        <form id=\"login-form\" name=\"login-form\" onsubmit=\"login(event)\">\n            <input\n              id=\"login-credits\"\n              type=\"text\"\n              name=\"credits\"\n              placeholder=\"Inloggningsuppgifter\"\n              required\n            />\n            <input type=\"submit\" value=\"logga in\">\n            <!-- <button onclick=\"login(event)\">Logga in</button> -->\n            <br /><span\n              id=\"login-input-info\"\n            ></span>\n          </form>\n      </details>";
+        loginEl.innerHTML = "\n        <details>\n        <summary>Logga in</summary>\n        <form id=\"login-form\" name=\"login-form\" onsubmit=\"login(event)\">\n            <input\n              id=\"login-credits\"\n              type=\"password\"\n              name=\"credits\"\n              placeholder=\"Inloggningsuppgifter\"\n              required\n            />\n            <input type=\"submit\" value=\"logga in\">\n            <!-- <button onclick=\"login(event)\">Logga in</button> -->\n            <br /><span\n              id=\"login-input-info\"\n            ></span>\n          </form>\n      </details>";
         toggleButtons();
     }
 }
@@ -241,7 +241,7 @@ function checkCurrent(date) {
 function printCourses(courses) {
     coursesEl.innerHTML = "";
     if (courses.length) {
-        courses.forEach(function (course) { return coursesEl.innerHTML += "<div class=\"api-item\" data-id=\"" + course.id + "\" data-type=\"courses\" data-names='[\"namn\",\"universitet\",\"startdatum\", \"slutdatum\"]' data-name=\"" + course.name + "\" data-school=\"" + course.school + "\" data-start-date=\"" + course.startDate + "\" data-end-date=\"" + course.endDate + "\"><div><b>" + course.name + "</b><br> " + course.school + "<br>" + course.startDate + " - " + course.endDate + "</div><div class=\"buttons\"><button onclick=\"editItem(event)\"><i class=\"far fa-edit\"></i></button><button onclick=\"destroy(event, 'courses')\"><i class=\"far fa-trash-alt\"></i></button></div></div>"; });
+        courses.forEach(function (course) { return coursesEl.innerHTML += "<div class=\"api-item\" data-id=\"" + course.id + "\" data-type=\"courses\" data-names='[\"namn\",\"universitet\",\"startdatum\", \"slutdatum\"]' data-name=\"" + course.name + "\" data-school=\"" + course.school + "\" data-start-date=\"" + course.startDate + "\" data-end-date=\"" + course.endDate + "\"><div><b>" + course.name + "</b><br> " + course.school + "<br>" + course.startDate + " - " + course.endDate + "</div><div class=\"buttons\"><button aria-label=\"redigera " + course.name + "\" onclick=\"editItem(event)\"><i class=\"far fa-edit\"></i></button><button aria-label=\"radera " + course.name + "\" onclick=\"destroy(event, 'courses')\"><i class=\"far fa-trash-alt\"></i></button></div></div>"; });
         toggleButtons(coursesEl);
     }
     else
@@ -250,7 +250,7 @@ function printCourses(courses) {
 function printJobs(jobs) {
     jobsEl.innerHTML = "";
     if (jobs.length) {
-        jobs.forEach(function (job) { return jobsEl.innerHTML += "<div class=\"api-item\" data-id=\"" + job.id + "\" data-type=\"jobs\" data-names='[\"arbetsplats\",\"arbetstitel\",\"startdatum\", \"slutdatum\"]' data-name=\"" + job.workplace + "\"data-title=\"" + job.title + "\" data-start-date=\"" + job.startDate + "\" data-end-date=\"" + job.endDate + "\"><div><b>" + job.workplace + "</b><br>" + job.title + "<br>" + job.startDate + " - " + checkCurrent(job.endDate) + "</div><div class=\"buttons\"><button onclick=\"editItem(event)\"><i class=\"far fa-edit\"></i></button><button onclick=\"destroy(event, 'jobs')\"><i class=\"far fa-trash-alt\"></i></button></div></div>"; });
+        jobs.forEach(function (job) { return jobsEl.innerHTML += "<div class=\"api-item\" data-id=\"" + job.id + "\" data-type=\"jobs\" data-names='[\"arbetsplats\",\"arbetstitel\",\"startdatum\", \"slutdatum\"]' data-workplace=\"" + job.workplace + "\"data-title=\"" + job.title + "\" data-start-date=\"" + job.startDate + "\" data-end-date=\"" + job.endDate + "\"><div><b>" + job.workplace + "</b><br>" + job.title + "<br>" + job.startDate + " - " + checkCurrent(job.endDate) + "</div><div class=\"buttons\"><button aria-label=\"redigera " + job.title + "\" onclick=\"editItem(event)\"><i class=\"far fa-edit\"></i></button><button aria-label=\"radera " + job.title + "\" onclick=\"destroy(event, 'jobs')\"><i class=\"far fa-trash-alt\"></i></button></div></div>"; });
         toggleButtons(jobsEl);
     }
     else
@@ -259,7 +259,7 @@ function printJobs(jobs) {
 function printWebsites(websites) {
     websitesEl.innerHTML = "";
     if (websites.length) {
-        websites.forEach(function (website) { return websitesEl.innerHTML += "<div class=\"api-item\" data-id=\"" + website.id + "\" data-type=\"websites\" data-names='[\"titel\",\"l\u00E4nk\",\"beskrivning\"]' data-title=\"" + website.title + "\" data-url=\"" + website.url + "\" data-description=\"" + website.description + "\"><div><b><a href=\"" + website.url + "\" target=\"_blank\">" + website.title + "</a></b><br>" + website.description + "</div><div class=\"buttons\"><button onclick=\"editItem(event)\"><i class=\"far fa-edit\"></i></button><button onclick=\"destroy(event, 'websites')\"><i class=\"far fa-trash-alt\"></i></button></div></div>"; });
+        websites.forEach(function (website) { return websitesEl.innerHTML += "<div class=\"api-item\" data-id=\"" + website.id + "\" data-type=\"websites\" data-names='[\"titel\",\"l\u00E4nk\",\"beskrivning\"]' data-title=\"" + website.title + "\" data-url=\"" + website.url + "\" data-description=\"" + website.description + "\"><div><b><a href=\"" + website.url + "\" target=\"_blank\" rel=\"noreferrer\">" + website.title + "</a></b><br>" + website.description + "</div><div class=\"buttons\"><button aria-label=\"redigera " + website.title + "\" onclick=\"editItem(event)\"><i class=\"far fa-edit\"></i></button><button aria-label=\"radera " + website.title + "\" onclick=\"destroy(event, 'websites')\"><i class=\"far fa-trash-alt\"></i></button></div></div>"; });
         toggleButtons(websitesEl);
     }
     else
@@ -357,7 +357,7 @@ function updateItem(event, id, type) {
                         document.getElementById('new-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?";
                     }
                     else {
-                        document.getElementById('new-error').innerHTML = "Något gick fel...";
+                        document.getElementById('new-error').innerHTML = "Något gick fel... testa logga ut och in om problemet kvarstår";
                     }
                     _a.label = 4;
                 case 4: return [2];
@@ -405,7 +405,7 @@ function newCourseForm() {
 }
 function addNewItem(event) {
     return __awaiter(this, void 0, void 0, function () {
-        var type, formData, plainFormData, meta, response, json;
+        var type, formData, plainFormData, meta, response, json, errorEl;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -432,11 +432,12 @@ function addNewItem(event) {
                 case 2: return [4, response.json()];
                 case 3:
                     json = _a.sent();
+                    errorEl = document.getElementById('new-error');
                     if (json.error == "date") {
-                        document.getElementById('new-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?";
+                        errorEl.innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?";
                     }
                     else {
-                        document.getElementById('new-error').innerHTML = "Något gick fel...";
+                        errorEl.innerHTML = "Något gick fel... testa logga ut och in om problemet kvarstår";
                     }
                     _a.label = 4;
                 case 4: return [2];

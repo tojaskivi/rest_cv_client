@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Hallåj! Jag är en webbutvecklare som gillar utmaningar stora som små. Hör av dig så hittar vi en lösning som passar just dig! :)"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
     <!-- get fontawesome icons used for the github/linkedin logo etc -->
@@ -13,7 +17,7 @@
       integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
       crossorigin="anonymous"
     />
-    <title>Tommi Ojaskivi // CV</title>
+    <title>Webbutvecklare - Tommi Ojaskivi</title>
   </head>
   <body>
     <div id="overlay-container">
@@ -28,28 +32,49 @@
           <div class="personal-info">
             <b class="accent">Tommi Ojaskivi</b>
             <br />
-            <span class="accent">webbutvecklare</span>
+            <p class="accent">
+              webbutvecklare,<br />
+              rymdfantast, fikaexpert
+            </p>
           </div>
           <p>
             Hallåj! Jag är en webbutvecklare med ett stort intresse för att
-            skapa moderna, tillgänglighetsanpassade, responsiva, hemsidor. På
-            fritiden gillar jag att lösa olika problem (korsord, rubiks kub) och
-            hålla på med musik. Jag har även försökt börja läsa mer böcker på sistone.
+            skapa <b>moderna</b>, <b>tillgänglighetsanpassade</b>,
+            <b>responsiva</b>, hemsidor.
+          </p>
+          <p>
+            År 2020 började jag läsa till webbutvecklare på MIUN efter att ha
+            läst systemutveckling ett år.
+          </p>
+          <p>
+            På fritiden gillar jag att lösa olika problem (korsord, rubiks kub)
+            och hålla på med musik. Jag har även ett stort intresse av rymden
+            och fika.
           </p>
           <p>Hör av dig så hittar vi en lösning som passar just dig! :)</p>
           <nav>
-            <a href="https://github.com/toskivi" target="_blank"
+            <a
+              href="https://github.com/toskivi"
+              aria-label="github"
+              target="_blank"
+              rel="noreferrer"
               ><i class="fab fa-github"></i
             ></a>
-            <a href="https://www.linkedin.com/in/tommiojaskivi/" target="_blank"
+            <a
+              href="https://www.linkedin.com/in/tommiojaskivi/"
+              aria-label="linkedin"
+              target="_blank"
+              rel="noreferrer"
               ><i class="fab fa-linkedin"></i
             ></a>
-            <a href="mailto:tommi@ojaskivi.se"><i class="fas fa-at"></i></a>
+            <a href="mailto:tommi@ojaskivi.se" aria-label="Mail"
+              ><i class="fas fa-at"></i
+            ></a>
           </nav>
         </div>
       </header>
       <main>
-        <h1>Webbutvecklare - cool h1</h1>
+        <h1>tommi, webb&shy;utvecklare</h1>
         <form class="search-form" id="search-form">
           <label>
             <span class="hidden">sök</span>
@@ -82,23 +107,33 @@
       </main>
     </div>
     <footer>
-      &copy; 2021 // Tommi<br />
       <nav>
-        <a href="https://github.com/toskivi" target="_blank"
+        <a
+          href="https://github.com/toskivi"
+          aria-label="github"
+          target="_blank"
+          rel="noreferrer"
           ><i class="fab fa-github"></i
         ></a>
-        <a href="https://www.linkedin.com/in/tommiojaskivi/" target="_blank"
+        <a
+          href="https://www.linkedin.com/in/tommiojaskivi/"
+          aria-label="linkedin"
+          target="_blank"
+          rel="noreferrer"
           ><i class="fab fa-linkedin"></i
         ></a>
-        <a href="mailto:tommi@ojaskivi.se"><i class="fas fa-at"></i></a>
+        <a href="mailto:tommi@ojaskivi.se" aria-label="Mail"
+          ><i class="fas fa-at"></i
+        ></a>
       </nav>
+      <p>&copy; 2021 // Tommi</p> 
       <div class="login" id="login">
         <details>
           <summary>Logga in</summary>
           <form id="login-form" name="login-form">
             <input
               id="login-credits"
-              type="text"
+              type="password"
               name="credits"
               placeholder="Inloggningsuppgifter"
             />

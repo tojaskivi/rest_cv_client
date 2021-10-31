@@ -124,6 +124,6 @@ exports.tsTask = tsTask;
 
 exports.build = parallel(
     series(imgTask, imgCompress),
-    parallel(copyHTML, sassCompiler, jsTask, imgTask)
+    parallel(copyHTML, sassCompiler, series(tsTask, jsTask), imgTask),
 )
 
