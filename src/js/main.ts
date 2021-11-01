@@ -359,11 +359,12 @@ async function updateItem(event, id: number, type: string) {
         fetchData(type);
     } else {
         const json = await response.json();
+        console.log(json)
         if (json.error == "date") {
-            document.getElementById('new-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?"
+            document.getElementById('edit-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?"
 
         } else {
-            document.getElementById('new-error').innerHTML = "Något gick fel... testa logga ut och in om problemet kvarstår"
+            document.getElementById('edit-error').innerHTML = "Något gick fel... testa logga ut och in om problemet kvarstår"
         }
 
     }
@@ -578,7 +579,9 @@ async function search(event: any) {
     jobsEl.innerHTML = loading;
     websitesEl.innerHTML = loading;
 
-    const response = await fetch(baseURL + `search/${searchTerm}`, meta)
+    const encoded = encodeURIComponent(searchTerm);
+
+    const response = await fetch(baseURL + `search/${encoded}`, meta)
         .then((response) => response.json())
         .then(data => { return data; })
         .catch(error => {
@@ -622,16 +625,16 @@ function highlight(element, searchTerm) {
     // loop through all the found elements
     items.forEach(element => {
         let data = element.querySelector(query);
-        
+
         // prevent error
-        if (data && data.innerHTML) {
-        
+        if (data && data.innerHTML.length > 0) {
             // Regex that targets the whole word where searchterm is found
             // If searching for dev from string WeBdeVelopeMent, the whole string will be found 
-            let regex = new RegExp(`\\w*${searchTerm}\\w*`, "gi");
-
-            // add a class and span to the found word
-            data.innerHTML = data.innerHTML.replace(regex, `<span class="search-highlight">${data.innerHTML.match(regex)[0]}</span>`)
+            let regex = new RegExp(`[\\wÅÄÖåäö-]\*${searchTerm}[\\wÅÄÖåäö-]\*`, "gi");
+            if (data.innerHTML.match(regex)) {
+                // add a class and span to the found word
+                data.innerHTML = data.innerHTML.replace(regex, `<span class="search-highlight">${data.innerHTML.match(regex)[0]}</span>`)
+            }
         }
     });
 }

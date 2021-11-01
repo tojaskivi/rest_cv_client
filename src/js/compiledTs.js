@@ -354,11 +354,12 @@ function updateItem(event, id, type) {
                 case 2: return [4, response.json()];
                 case 3:
                     json = _a.sent();
+                    console.log(json);
                     if (json.error == "date") {
-                        document.getElementById('new-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?";
+                        document.getElementById('edit-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?";
                     }
                     else {
-                        document.getElementById('new-error').innerHTML = "Något gick fel... testa logga ut och in om problemet kvarstår";
+                        document.getElementById('edit-error').innerHTML = "Något gick fel... testa logga ut och in om problemet kvarstår";
                     }
                     _a.label = 4;
                 case 4: return [2];
@@ -459,7 +460,7 @@ function escapeHtml(text) {
 }
 function search(event) {
     return __awaiter(this, void 0, void 0, function () {
-        var temp, searchTerm, meta, loading, response, _a, _b, _i, property, i, _c;
+        var temp, searchTerm, meta, loading, encoded, response, _a, _b, _i, property, i, _c;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -487,7 +488,8 @@ function search(event) {
                     coursesEl.innerHTML = loading;
                     jobsEl.innerHTML = loading;
                     websitesEl.innerHTML = loading;
-                    return [4, fetch(baseURL + ("search/" + searchTerm), meta)
+                    encoded = encodeURIComponent(searchTerm);
+                    return [4, fetch(baseURL + ("search/" + encoded), meta)
                             .then(function (response) { return response.json(); })
                             .then(function (data) { return data; })["catch"](function (error) {
                             console.error(error);
@@ -548,9 +550,11 @@ function highlight(element, searchTerm) {
     }
     items.forEach(function (element) {
         var data = element.querySelector(query);
-        if (data && data.innerHTML) {
-            var regex = new RegExp("\\w*" + searchTerm + "\\w*", "gi");
-            data.innerHTML = data.innerHTML.replace(regex, "<span class=\"search-highlight\">" + data.innerHTML.match(regex)[0] + "</span>");
+        if (data && data.innerHTML.length > 0) {
+            var regex = new RegExp("[\\w\u00C5\u00C4\u00D6\u00E5\u00E4\u00F6-]*" + searchTerm + "[\\w\u00C5\u00C4\u00D6\u00E5\u00E4\u00F6-]*", "gi");
+            if (data.innerHTML.match(regex)) {
+                data.innerHTML = data.innerHTML.replace(regex, "<span class=\"search-highlight\">" + data.innerHTML.match(regex)[0] + "</span>");
+            }
         }
     });
 }
