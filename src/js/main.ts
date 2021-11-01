@@ -359,7 +359,6 @@ async function updateItem(event, id: number, type: string) {
         fetchData(type);
     } else {
         const json = await response.json();
-        console.log(json)
         if (json.error == "date") {
             document.getElementById('edit-error').innerHTML = "Datum inkorrekt. Är slutdatum senare än startdatum?"
 
